@@ -7,6 +7,8 @@ const currencies = require('../lib/currencies.json');
 
 const API = 'https://api.fixer.io/latest';
 
+
+//convert a sum of a base currency into an other currency with a rate of exchange
 const convert = configuration => {
   const {amount, to, from, response, loading} = configuration;
 
@@ -34,6 +36,7 @@ const convert = configuration => {
   process.exit(1);
 };
 
+//read parameters, manages errors, find exchange rate and convert currencies
 const cash = async command => {
   const amount = command.amount;
   const from = command.from.toUpperCase();
@@ -54,7 +57,7 @@ const cash = async command => {
   loading.start();
 
   try {
-    const response = await got(API, {'json': true});
+    const response = await got(API, {'json': true}); //Found exchange rate
 
     convert({amount, to, from, response, loading});
   } catch (err) {

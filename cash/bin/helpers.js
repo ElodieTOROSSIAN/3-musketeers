@@ -8,6 +8,7 @@ const config = new Conf();
 
 updateNotifier({pkg}).notify();
 
+//configure new default values of currencies
 const saveCurrencies = argv => {
   config.set('defaultFrom', argv[1] || config.get('defaultFrom', 'USD'));
   config.set(
@@ -20,11 +21,13 @@ const saveCurrencies = argv => {
   process.exit(1);
 };
 
+//display the number of the version of application 
 const version = () => {
   console.log(pkg.version);
   process.exit(1);
 };
 
+//display help information of what to do in CMD 
 const help = () => {
   console.log(`
 Usage:
@@ -57,6 +60,7 @@ Examples:
   process.exit(1);
 };
 
+//if we use --save or --help or --version helpers return information 
 const helpers = argv => {
   // Version
   if (argv.indexOf('--version') !== - 1 || argv.indexOf('-v') !== - 1) {
@@ -72,6 +76,7 @@ const helpers = argv => {
     help();
   }
 
+  // Save
   if (
     argv.indexOf('--save') !== - 1
     || argv.indexOf('-s') !== - 1
